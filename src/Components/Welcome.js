@@ -1,10 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from '../../assets/images/logo.png';
 import qrCodeScanner from "../../assets/images/qrcode.png";
 
 import {View, StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Welcome = (props) => {
+const Welcome = ({navigation}) => {
+    const [phone, setPhone] = useState("");
+    const [status, setStatus] = useState("");
+
+    useEffect(()=>{
+        AsyncStorage.getItem('phone').then(value =>{
+            setPhone(value)
+        });
+
+        AsyncStorage.getItem('loginStatus').then(value =>{
+            setStatus(value)
+        });
+
+    }, [])
+
+    if (status == '1')
+    {
+        var path = 'Home'
+    }else {
+        var path = 'AccountEntry';
+    }
 
     return (
         <View style={styles.container}>
@@ -14,7 +35,7 @@ const Welcome = (props) => {
             </View>
             <View style={{marginTop: 150}}>
                 <TouchableOpacity onPress={() =>{
-                        props.navigation.navigate("Scanner")
+                        navigation.navigate(path)
                 }}>
                     <Image style={styles.qrCodeScanner} source={qrCodeScanner}/>
                 </TouchableOpacity>
