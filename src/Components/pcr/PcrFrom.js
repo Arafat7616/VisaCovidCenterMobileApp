@@ -43,6 +43,9 @@ const PcrFrom = ({navigation}) => {
                             if (response.data.status == '1')
                             {
                                 Alert.alert(response.data.message)
+                                AsyncStorage.setItem('user_phone', "");
+                                AsyncStorage.setItem('service_type', "");
+                                AsyncStorage.setItem('application_id', "");
                                 navigation.navigate("Home")
                             }else if (response.data.status == '0')
                             {
@@ -55,7 +58,7 @@ const PcrFrom = ({navigation}) => {
                         });
                 }}  style={styles.otpButton}
                 >
-                    <Text style={styles.otpButtonView}>Complete sample collection?</Text>
+                    <Text style={styles.otpButtonView}>Complete sample collection ?</Text>
                 </TouchableOpacity>
             </View>
         </>

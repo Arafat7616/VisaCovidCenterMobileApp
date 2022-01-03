@@ -20,11 +20,13 @@ const Welcome = ({navigation}) => {
 
     }, [])
 
+    var path = '';
+
     if (status == '1')
     {
-        var path = 'Home'
+        path = 'Home'
     }else {
-        var path = 'AccountEntry';
+        path = 'AccountEntry';
     }
 
     return (

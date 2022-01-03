@@ -41,7 +41,9 @@ const Home = ({navigation}) => {
 
             <View style={styles.mainCard}>
                 <TouchableOpacity
-                    onPress={()=>alert('hi')}
+                    onPress={()=>{
+                        navigation.navigate("Vaccination")
+                    }}
                 >
                     <Image  style={styles.mainCardContent} source={Vaccination} />
                 </TouchableOpacity>
@@ -49,7 +51,9 @@ const Home = ({navigation}) => {
 
             <View style={styles.mainCard}>
                 <TouchableOpacity
-                    onPress={()=>alert('hi')}
+                    onPress={()=>{
+                        navigation.navigate("Booster list")
+                    }}
                 >
                     <Image  style={styles.mainCardContent} source={Booster} />
                 </TouchableOpacity>

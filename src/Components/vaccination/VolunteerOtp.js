@@ -35,7 +35,7 @@ const VolunteerOtp = ({navigation}) => {
             .then(function (response) {
                 if (response.data.status == '1')
                 {
-                    navigation.navigate("User otp", {userPhone: userPhone})
+                    navigation.navigate("Vaccine User otp", {userPhone: userPhone})
                 }else if (response.data.status == '0')
                 {
                     Alert.alert(response.data.message)

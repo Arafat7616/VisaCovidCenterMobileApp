@@ -5,54 +5,23 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import appUrl from "../../RestApi/AppUrl";
 import axios from "axios";
 
+const UserOtp = ({navigation, route}) => {
 
-const VolunteerOtp = ({navigation}) => {
-
-    const [phone, setPhone] = useState("");
-    const [userPhone, setUserPhone] = useState("");
+    const [userPhone, setUserPhone] = useState(route.params.userPhone);
     const [otp, setOtp] = useState(0);
 
 
-    useEffect(()=>{
-        AsyncStorage.getItem('phone').then(value =>{
-            setPhone(value)
-        });
-
-        AsyncStorage.getItem('user_phone').then(value =>{
-            setUserPhone(value)
-        });
-
-    }, [])
-
     const goForword=(message)=>{
-        const url = appUrl.OtpSend;
-        let jsonObject = {phone:userPhone};
-        let config = {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded', }
-        };
-
-        axios.post(url, JSON.stringify(jsonObject), config)
-            .then(function (response) {
-                if (response.data.status == '1')
-                {
-                    navigation.navigate("User otp", {userPhone: userPhone})
-                }else if (response.data.status == '0')
-                {
-                    Alert.alert(response.data.message)
-                }
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        Alert.alert(message);
+        navigation.navigate("Booster from")
     }
+
     return (
         <ScrollView>
             <View style={styles.container}>
                 <View>
-                    <Text style={styles.titleStyle}>OTP Code is sent to <Text style={styles.titleNumberStyle}>{phone}</Text> number</Text>
+                    <Text style={styles.titleStyle}>OTP Code is sent to <Text style={styles.titleNumberStyle}>{userPhone}</Text> number</Text>
                 </View>
-
                 <OTPInputView
                     style={styles.containerInput}
                     pinCount={6}
@@ -63,36 +32,35 @@ const VolunteerOtp = ({navigation}) => {
                         setOtp(code)
                     }}
                 />
+            </View>
 
-                <View style={styles.SubmitBtn}>
-                    <TouchableOpacity onPress={()=>{
-                        const url = appUrl.OtpCheck;
-                        let jsonObject = {phone:phone, otp:otp};
-                        let config = {
-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-                        };
+            <View style={styles.SubmitBtn}>
+                <TouchableOpacity onPress={()=>{
+                    const url = appUrl.OtpCheck;
+                    let jsonObject = {phone:userPhone, otp:otp};
+                    let config = {
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                    };
 
-                        axios.post(url, JSON.stringify(jsonObject), config)
-                            .then(function (response) {
-                                console.log(response.data)
-                                if (response.data.status == '1')
-                                {
-                                    goForword(response.data.message);
-                                }else if (response.data.status == '0')
-                                {
-                                    Alert.alert(response.data.message);
-                                }
+                    axios.post(url, JSON.stringify(jsonObject), config)
+                        .then(function (response) {
+                            console.log(response.data)
+                            if (response.data.status == '1')
+                            {
+                                goForword(response.data.message);
+                            }else if (response.data.status == '0')
+                            {
+                                Alert.alert(response.data.message);
+                            }
 
-                            })
-                            .catch(function (error) {
-                                console.log(error);
-                            });
-                    }}  style={styles.otpButton}
-                    >
-                        <Text style={styles.otpButtonView}>Verify & Continue</Text>
-                    </TouchableOpacity>
-                </View>
-
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }}  style={styles.otpButton}
+                >
+                    <Text style={styles.otpButtonView}>Verify & Continue</Text>
+                </TouchableOpacity>
             </View>
         </ScrollView>
     );
@@ -135,7 +103,8 @@ const styles = StyleSheet.create({
     },
     SubmitBtn:{
         textAlign:"center",
-        width:"70%",
+        marginLeft:"15%",
+        marginTop:20
     },
     btnResend: {
         width: 200,
@@ -168,14 +137,13 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         height: 40,
-        width: "100%",
+        width: "70%",
         borderRadius: 8,
         margin: 20,
-        marginTop:40
     },
     otpButtonView:{
         color: "white",
-        fontSize: 16,
+        fontSize: 16
     },
 
     borderStyleHighLighted: {
@@ -195,4 +163,5 @@ const styles = StyleSheet.create({
     },
 });
 
-export default VolunteerOtp;
+
+export default UserOtp;

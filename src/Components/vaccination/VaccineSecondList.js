@@ -14,18 +14,16 @@ import {
     SafeAreaView
 } from "react-native";
 
-
-const PcrList = ({navigation}) => {
+const VaccineFirstList = ({navigation}) => {
 
     const [phone, setPhone] = useState("");
     const [registeredList, setRegisteredList] = useState([]);
-
 
     useEffect(()=>{
         AsyncStorage.getItem('phone').then(value =>{
             setPhone(value)
 
-            const url = appUrl.PcrRegisteredList;
+            const url = appUrl.VaccinationRegisteredSecondList;
             let jsonObject = {phone:value};
             let config = {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded', }
@@ -48,7 +46,6 @@ const PcrList = ({navigation}) => {
         });
     }, [])
 
-
     return (
         <SafeAreaView style={styles.container}>
 
@@ -62,7 +59,7 @@ const PcrList = ({navigation}) => {
                             <TouchableOpacity
                                 onPress={()=>{
                                     AsyncStorage.setItem('user_phone', item.user_phone);
-                                    AsyncStorage.setItem('service_type', "pcr");
+                                    AsyncStorage.setItem('service_type', "vaccineSecond");
                                     AsyncStorage.setItem('application_id', item.application_id);
 
                                     const url = appUrl.OtpSend;
@@ -74,7 +71,7 @@ const PcrList = ({navigation}) => {
                                         .then(function (response) {
                                             if (response.data.status == '1')
                                             {
-                                                navigation.navigate("Volunteer otp")
+                                                navigation.navigate("Vaccine Volunteer otp")
                                             }else if (response.data.status == '0')
                                             {
                                                 Alert.alert(response.data.message)
@@ -88,6 +85,7 @@ const PcrList = ({navigation}) => {
                             >
                                 <View style={styles.mainCard}>
                                     <Text style={styles.mainCardName}>Name: {item.user_name}</Text>
+                                    <Text style={styles.mainCardVaccine}>Vaccine: {item.name_of_vaccine}</Text>
                                     <Text style={styles.mainCardPhone}>Phone: {item.user_phone}</Text>
                                     <Text style={styles.mainCardReg}>Reg. ID: {item.application_id}</Text>
                                 </View>
@@ -115,7 +113,9 @@ const styles = StyleSheet.create({
         color:'#0055A1',
         fontWeight:"bold",
     },
-
+    mainCardVaccine:{
+        fontWeight:"bold",
+    },
     mainCardPhone:{
 
     },
@@ -127,5 +127,4 @@ const styles = StyleSheet.create({
     },
 });
 
-
-export default PcrList;
+export default VaccineFirstList;
