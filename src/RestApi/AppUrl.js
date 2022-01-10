@@ -2,7 +2,8 @@
 class AppUrl{
     //static BaseUrl = 'http://10.10.10.117/VisaCovidCenterDevelopment/public/';
     static BaseUrl = 'http://192.168.31.150/VisaCovidCenterDevelopment/public/';
-    //static BaseUrl = 'https://visacovid.xyz/';
+    // static BaseUrl = 'https://visacovid.xyz/';
+    // static BaseUrl = 'http://visacovid.com/';
 
 
     static VolunteerLogin = this.BaseUrl+'api/volunteer/login';

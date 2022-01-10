@@ -33,8 +33,7 @@ const Welcome = ({navigation}) => {
         <View style={styles.container}>
             <View style={styles.upperBlock}>
                 <Image style={styles.logo} source={logo}/>
-                <Text style={{textAlign: "center", marginLeft: 77, marginTop: -16}}>A Trusted Service !</Text>
-            </View>
+           </View>
             <View style={{marginTop: 150}}>
                 <TouchableOpacity onPress={() =>{
                         navigation.navigate(path)
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
     logo: {
         justifyContent: 'center',
         alignItems: 'center',
-        height:  150,
+        height:  300,
         width: 230,
     },
     qrCodeScanner:{
