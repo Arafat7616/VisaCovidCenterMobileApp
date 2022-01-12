@@ -14,7 +14,7 @@ export default function App({navigation}) {
     return (
         <ScrollView>
             <View style={styles.container}>
-                <Image style={styles.image} source={require("../../assets/images/icon.png")} />
+                <Image style={styles.image} source={require("../../assets/images/logo.png")} />
 
                 <View style={styles.inputView}>
                     <TextInput
@@ -94,6 +94,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height:  280,
         width: 230,
+        marginBottom:30,
+        marginTop:30,
     },
 
     inputView: {
@@ -112,6 +114,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         textAlign:"center",
+        borderTopWidth:0
     },
 
     forgot_button: {
