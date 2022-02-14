@@ -23,7 +23,7 @@ import BoosterUserOtp from "./src/Components/booster/UserOtp";
 import BoosterVolunteerOtp from "./src/Components/booster/VolunteerOtp";
 
 
-//booster
+//vaccine
 import VaccineFrom from "./src/Components/vaccination/VaccineFrom";
 import VaccineFirstList from "./src/Components/vaccination/VaccineFirstList";
 import VaccineSecondList from "./src/Components/vaccination/VaccineSecondList";
