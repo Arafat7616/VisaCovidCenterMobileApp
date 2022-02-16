@@ -31,20 +31,20 @@ const BoosterList = ({navigation}) => {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded', }
             };
             axios.post(url, JSON.stringify(jsonObject), config)
-                .then(function (response) {
-                    if (response.data.status == '1')
-                    {
-                        setRegisteredList(response.data.myData)
-                        setPhone(value);
-                    }else if (response.data.status == '0')
-                    {
-                        Alert.alert(response.data.message)
-                    }
+            .then(function (response) {
+                if (response.data.status == '1')
+                {
+                    setRegisteredList(response.data.myData)
+                    setPhone(value);
+                }else if (response.data.status == '0')
+                {
+                    Alert.alert(response.data.message)
+                }
 
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         });
     }, [])
 
@@ -53,7 +53,7 @@ const BoosterList = ({navigation}) => {
 
             {
                 registeredList.length == 0  ?
-                    (<ActivityIndicator style={{marginTop:'60%'}} animating={true} size="large" color="#0055A1" />) :
+                    (<Text style={styles.dataStatus}>No data found</Text>) :
                     (<FlatList
                         data={registeredList}
                         keyExtractor={item => item.application_id.toString()}
@@ -126,6 +126,12 @@ const styles = StyleSheet.create({
     },
     mainCardReg:{
         color:'#000'
+    },
+    dataStatus:{
+        color: '#eece05',
+        textAlign:"center",
+        marginTop: 100,
+        fontWeight:"bold",
     },
 });
 
