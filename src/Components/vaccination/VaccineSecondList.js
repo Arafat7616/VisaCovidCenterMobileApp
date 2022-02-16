@@ -52,7 +52,7 @@ const VaccineSecondList = ({navigation}) => {
 
             {
                 registeredList.length == 0  ?
-                (<ActivityIndicator style={{marginTop:'60%'}} animating={true} size="large" color="#0055A1" />) :
+                (<Text style={styles.dataStatus}>No data found</Text>) :
                 (<FlatList
                     data={registeredList}
                     keyExtractor={item => item.application_id.toString()}
@@ -62,6 +62,7 @@ const VaccineSecondList = ({navigation}) => {
                                 AsyncStorage.setItem('user_phone', item.user_phone);
                                 AsyncStorage.setItem('service_type', "vaccineSecond");
                                 AsyncStorage.setItem('application_id', item.application_id);
+                                AsyncStorage.setItem('synchronize_id', item.synchronize_id);
 
                                 const url = appUrl.OtpSend;
                                 let jsonObject = {phone:phone};
@@ -94,7 +95,6 @@ const VaccineSecondList = ({navigation}) => {
                     )}
                 />)
             }
-
         </SafeAreaView>
     );
 };
@@ -125,6 +125,12 @@ const styles = StyleSheet.create({
     },
     mainCardReg:{
         color:'#000'
+    },
+    dataStatus:{
+        color: '#eece05',
+        textAlign:"center",
+        marginTop: 100,
+        fontWeight:"bold",
     },
 });
 

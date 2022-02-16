@@ -17,11 +17,9 @@ const VolunteerOtp = ({navigation}) => {
         AsyncStorage.getItem('phone').then(value =>{
             setPhone(value)
         });
-
         AsyncStorage.getItem('user_phone').then(value =>{
             setUserPhone(value)
         });
-
     }, [])
 
     const goForword=(message)=>{

@@ -9,6 +9,7 @@ const VaccineFrom = ({navigation}) => {
     const [phone, setPhone] = useState(null);
     const [userPhone, setUserPhone] = useState(null);
     const [applicationId, setApplicationId] = useState(null);
+    const [synchronizeId, setSynchronizeId] = useState(null);
     const [serviceType, setServiceType] = useState('');
 
 
@@ -25,40 +26,43 @@ const VaccineFrom = ({navigation}) => {
             setApplicationId(value)
         });
 
+        AsyncStorage.getItem('synchronize_id').then(value =>{
+            setSynchronizeId(value)
+        });
+
         AsyncStorage.getItem('service_type').then(value =>{
             setServiceType(value)
         });
-
-
     }, [])
 
     return (
         <View style={styles.SubmitBtn}>
             <TouchableOpacity onPress={()=>{
                 const url = appUrl.VaccinationFrom;
-                let jsonObject = {phone:phone, applicationId:applicationId, serviceType:serviceType};
+                let jsonObject = {phone:phone, applicationId:applicationId, synchronizeId:synchronizeId, serviceType:serviceType};
                 let config = {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 };
 
                 axios.post(url, JSON.stringify(jsonObject), config)
-                    .then(function (response) {
-                        if (response.data.status == '1')
-                        {
-                            Alert.alert(response.data.message)
-                            AsyncStorage.setItem('user_phone', "");
-                            AsyncStorage.setItem('service_type', "");
-                            AsyncStorage.setItem('application_id', "");
-                            navigation.navigate("Home")
-                        }else if (response.data.status == '0')
-                        {
-                            Alert.alert(response.data.message);
-                        }
+                .then(function (response) {
+                    if (response.data.status == '1')
+                    {
+                        Alert.alert(response.data.message)
+                        AsyncStorage.setItem('user_phone', "");
+                        AsyncStorage.setItem('service_type', "");
+                        AsyncStorage.setItem('application_id', "");
+                        AsyncStorage.setItem('synchronize_id', "");
+                        navigation.navigate("Home")
+                    }else if (response.data.status == '0')
+                    {
+                        Alert.alert(response.data.message);
+                    }
 
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             }}  style={styles.otpButton}
             >
                 {
