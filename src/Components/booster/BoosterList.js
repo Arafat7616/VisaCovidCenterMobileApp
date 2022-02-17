@@ -70,19 +70,19 @@ const BoosterList = ({navigation}) => {
                                         headers: { 'Content-Type': 'application/x-www-form-urlencoded', }
                                     };
                                     axios.post(url, JSON.stringify(jsonObject), config)
-                                        .then(function (response) {
-                                            if (response.data.status == '1')
-                                            {
-                                                navigation.navigate("Booster Volunteer otp")
-                                            }else if (response.data.status == '0')
-                                            {
-                                                Alert.alert(response.data.message)
-                                            }
+                                    .then(function (response) {
+                                        if (response.data.status == '1')
+                                        {
+                                            navigation.navigate("Booster Volunteer otp")
+                                        }else if (response.data.status == '0')
+                                        {
+                                            Alert.alert(response.data.message)
+                                        }
 
-                                        })
-                                        .catch(function (error) {
-                                            console.log(error);
-                                        });
+                                    })
+                                    .catch(function (error) {
+                                        console.log(error);
+                                    });
                                 }}
                             >
                                 <View style={styles.mainCard}>
