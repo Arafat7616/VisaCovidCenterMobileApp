@@ -45,23 +45,23 @@ const PcrFrom = ({navigation}) => {
                     };
 
                     axios.post(url, JSON.stringify(jsonObject), config)
-                        .then(function (response) {
-                            if (response.data.status == '1')
-                            {
-                                Alert.alert(response.data.message)
-                                AsyncStorage.setItem('user_phone', "");
-                                AsyncStorage.setItem('service_type', "");
-                                AsyncStorage.setItem('application_id', "");
-                                navigation.navigate("Home")
-                            }else if (response.data.status == '0')
-                            {
-                                Alert.alert(response.data.message);
-                            }
-
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
+                    .then(function (response) {
+                        if (response.data.status == '1')
+                        {
+                            Alert.alert(response.data.message)
+                            AsyncStorage.setItem('user_phone', "");
+                            AsyncStorage.setItem('service_type', "");
+                            AsyncStorage.setItem('application_id', "");
+                            AsyncStorage.setItem('synchronize_id', "");
+                            navigation.navigate("Home")
+                        }else if (response.data.status == '0')
+                        {
+                            Alert.alert(response.data.message);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
                 }}  style={styles.otpButton}
                 >
                     <Text style={styles.otpButtonView}>Complete sample collection ?</Text>

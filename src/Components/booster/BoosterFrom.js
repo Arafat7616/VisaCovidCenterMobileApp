@@ -9,6 +9,7 @@ const BoosterFrom = ({navigation}) => {
     const [phone, setPhone] = useState(null);
     const [userPhone, setUserPhone] = useState(null);
     const [applicationId, setApplicationId] = useState(null);
+    const [synchronizeId, setSynchronizeId] = useState(null);
 
 
     useEffect(()=>{
@@ -24,6 +25,9 @@ const BoosterFrom = ({navigation}) => {
             setApplicationId(value)
         });
 
+        AsyncStorage.getItem('synchronize_id').then(value =>{
+            setSynchronizeId(value)
+        });
 
     }, [])
 
@@ -31,7 +35,7 @@ const BoosterFrom = ({navigation}) => {
         <View style={styles.SubmitBtn}>
             <TouchableOpacity onPress={()=>{
                 const url = appUrl.BoosterFrom;
-                let jsonObject = {phone:phone, applicationId:applicationId};
+                let jsonObject = {phone:phone, applicationId:applicationId, synchronizeId:synchronizeId};
                 let config = {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 };
@@ -44,6 +48,7 @@ const BoosterFrom = ({navigation}) => {
                             AsyncStorage.setItem('user_phone', "");
                             AsyncStorage.setItem('service_type', "");
                             AsyncStorage.setItem('application_id', "");
+                            AsyncStorage.setItem('synchronize_id', "");
                             navigation.navigate("Home")
                         }else if (response.data.status == '0')
                         {
