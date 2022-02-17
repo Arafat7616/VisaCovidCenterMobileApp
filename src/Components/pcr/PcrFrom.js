@@ -10,6 +10,7 @@ const PcrFrom = ({navigation}) => {
     const [phone, setPhone] = useState(null);
     const [userPhone, setUserPhone] = useState(null);
     const [applicationId, setApplicationId] = useState(null);
+    const [synchronizeId, setSynchronizeId] = useState(null);
 
 
     useEffect(()=>{
@@ -19,6 +20,11 @@ const PcrFrom = ({navigation}) => {
 
         AsyncStorage.getItem('user_phone').then(value =>{
             setUserPhone(value)
+        });
+
+
+        AsyncStorage.getItem('synchronize_id').then(value =>{
+            setSynchronizeId(value)
         });
 
         AsyncStorage.getItem('application_id').then(value =>{
@@ -33,7 +39,7 @@ const PcrFrom = ({navigation}) => {
             <View style={styles.SubmitBtn}>
                 <TouchableOpacity onPress={()=>{
                     const url = appUrl.PcrFrom;
-                    let jsonObject = {phone:phone, applicationId:applicationId};
+                    let jsonObject = {phone:phone, applicationId:applicationId, synchronizeId:synchronizeId};
                     let config = {
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                     };

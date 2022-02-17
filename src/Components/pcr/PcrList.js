@@ -60,9 +60,11 @@ const PcrList = ({navigation}) => {
                     renderItem={({item}) =>(
                         <TouchableOpacity
                             onPress={()=>{
+                                // console.log("---"+item.synchronize_id+"----")
                                 AsyncStorage.setItem('user_phone', item.user_phone);
                                 AsyncStorage.setItem('service_type', "pcr");
                                 AsyncStorage.setItem('application_id', item.application_id);
+                                AsyncStorage.setItem('synchronize_id', item.synchronize_id);
 
                                 const url = appUrl.OtpSend;
                                 let jsonObject = {phone:phone};
@@ -94,7 +96,6 @@ const PcrList = ({navigation}) => {
                     )}
                 />)
             }
-
         </SafeAreaView>
     );
 };
