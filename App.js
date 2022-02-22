@@ -18,10 +18,10 @@ import PcrFrom from './src/Components/pcr/PcrFrom';
 import PcrList from './src/Components/pcr/PcrList';
 
 //rtPcr
-import RtPcrUserOtp from './src/Components/rtPcr/UserOtp';
-import RtPcrVolunteerOtp from './src/Components/rtPcr/VolunteerOtp';
-import RtPcrPcrFrom from './src/Components/rtPcr/PcrFrom';
-import RtPcrPcrList from './src/Components/rtPcr/PcrList';
+import RtPcrUserOtp from './src/Components/rtPcr/RtPcrUserOtp';
+import RtPcrVolunteerOtp from './src/Components/rtPcr/RtPcrVolunteerOtp';
+import RtPcrPcrFrom from './src/Components/rtPcr/RtPcrPcrFrom';
+import RtPcrPcrList from './src/Components/rtPcr/RtPcrPcrList';
 
 //booster
 import BoosterFrom from "./src/Components/booster/BoosterFrom";
