@@ -7,6 +7,7 @@ import Welcome from './src/Components/Welcome';
 import QRScanner from './src/Components/QRCodeScanner';
 import MobileOTP from './src/Components/MobileOTP';
 import Home from './src/Components/Home';
+import RtPcrHome from './src/Components/RtPcrHome';
 import NIDScanner from "./src/Components/Sample/index.android";
 import AccountEntry from "./src/Components/AccountEntry";
 
@@ -15,6 +16,12 @@ import UserOtp from './src/Components/pcr/UserOtp';
 import VolunteerOtp from './src/Components/pcr/VolunteerOtp';
 import PcrFrom from './src/Components/pcr/PcrFrom';
 import PcrList from './src/Components/pcr/PcrList';
+
+//rtPcr
+import RtPcrUserOtp from './src/Components/rtPcr/UserOtp';
+import RtPcrVolunteerOtp from './src/Components/rtPcr/VolunteerOtp';
+import RtPcrPcrFrom from './src/Components/rtPcr/PcrFrom';
+import RtPcrPcrList from './src/Components/rtPcr/PcrList';
 
 //booster
 import BoosterFrom from "./src/Components/booster/BoosterFrom";
@@ -46,24 +53,30 @@ const App = () => {
           options={{ title: 'Welcome', style: {backgroundColor: 'gray'} }}
         />
 
-          <Stack.Screen
-              name="AccountEntry"
-              component={AccountEntry}
-              options={{ title: 'Login', style: {backgroundColor: 'gray'} }}
-          />
+        <Stack.Screen
+            name="AccountEntry"
+            component={AccountEntry}
+            options={{ title: 'Login', style: {backgroundColor: 'gray'} }}
+        />
 
-          <Stack.Screen
-              name="Mobile Otp"
-              component={MobileOTP}
-              options={{ title: 'Mobile Otp', style: {backgroundColor: 'gray'} }}
-          />
+        <Stack.Screen
+            name="Mobile Otp"
+            component={MobileOTP}
+            options={{ title: 'Mobile Otp', style: {backgroundColor: 'gray'} }}
+        />
 
-          <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ title: 'Home', style: {backgroundColor: 'gray'} }}
-          />
+        <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ title: 'Home', style: {backgroundColor: 'gray'} }}
+        />
+        <Stack.Screen
+            name="RtPcrHome"
+            component={RtPcrHome}
+            options={{ title: 'Home', style: {backgroundColor: 'gray'} }}
+        />
 
+        {/* pcr related natigation start here */}
         <Stack.Screen
             name="User otp"
             component={UserOtp}
@@ -88,6 +101,36 @@ const App = () => {
           component={PcrList}
           options={{ title: 'Pcr registration list', style: {backgroundColor: 'gray'} }}
         />
+
+        {/* pcr related natigation end here */}
+
+        {/* RT-PCR related natigation start here */}
+        <Stack.Screen
+            name="Rt Pcr User otp"
+            component={RtPcrUserOtp}
+            options={{ title: 'RT-PCR User otp', style: {backgroundColor: 'gray'} }}
+        />
+
+        <Stack.Screen
+            name="Rt Pcr Volunteer otp"
+            component={RtPcrVolunteerOtp}
+            options={{ title: 'RT-PCR Volunteer otp', style: {backgroundColor: 'gray'} }}
+        />
+
+
+        <Stack.Screen
+            name="Rt Pcr from"
+            component={RtPcrPcrFrom}
+            options={{ title: 'RT-PCR test', style: {backgroundColor: 'gray'} }}
+        />
+
+        <Stack.Screen
+          name="Rt Pcr list"
+          component={RtPcrPcrList}
+          options={{ title: 'RT-PCR registration list', style: {backgroundColor: 'gray'} }}
+        />
+
+        {/* RT-PCR related natigation end here */}
 
         <Stack.Screen
             name="Booster User otp"

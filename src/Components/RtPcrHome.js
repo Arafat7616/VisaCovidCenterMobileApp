@@ -5,7 +5,7 @@ import PCR from '../../assets/images/pcr_success_image.png';
 import Vaccination from '../../assets/images/vaccine_success_image.png';
 import Booster from '../../assets/images/booster_success_image.png';
 
-const Home = ({navigation}) => {
+const RtPcrHome = ({navigation}) => {
 
     const [phone, setPhone] = useState("");
     const [status, setStatus] = useState("");
@@ -36,26 +36,6 @@ const Home = ({navigation}) => {
                     }}
                 >
                     <Image  style={styles.mainCardContent} source={PCR} />
-                </TouchableOpacity>
-            </View>
-
-            <View style={styles.mainCard}>
-                <TouchableOpacity
-                    onPress={()=>{
-                        navigation.navigate("Vaccination")
-                    }}
-                >
-                    <Image  style={styles.mainCardContent} source={Vaccination} />
-                </TouchableOpacity>
-            </View>
-
-            <View style={styles.mainCard}>
-                <TouchableOpacity
-                    onPress={()=>{
-                        navigation.navigate("Booster list")
-                    }}
-                >
-                    <Image  style={styles.mainCardContent} source={Booster} />
                 </TouchableOpacity>
             </View>
 
@@ -103,4 +83,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Home;
+export default RtPcrHome;

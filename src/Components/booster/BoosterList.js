@@ -50,7 +50,6 @@ const BoosterList = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
-
             {
                 registeredList.length == 0  ?
                     (<Text style={styles.dataStatus}>No data found</Text>) :
