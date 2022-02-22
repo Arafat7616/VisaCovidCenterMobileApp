@@ -10,7 +10,6 @@ const RtPcrHome = ({navigation}) => {
     const [phone, setPhone] = useState("");
     const [status, setStatus] = useState("");
 
-
     useEffect(()=>{
         AsyncStorage.getItem('phone').then(value =>{
             setPhone(value)
@@ -32,7 +31,7 @@ const RtPcrHome = ({navigation}) => {
             <View style={styles.mainCard}>
                 <TouchableOpacity
                     onPress={()=>{
-                        navigation.navigate("Pcr list")
+                        navigation.navigate("Rt Pcr list")
                     }}
                 >
                     <Image  style={styles.mainCardContent} source={PCR} />

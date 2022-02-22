@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import appUrl from "../../RestApi/AppUrl";
 import axios from "axios";
 
-const PcrFrom = ({navigation}) => {
+const RtPcrFrom = ({navigation}) => {
 
     const [phone, setPhone] = useState(null);
     const [userPhone, setUserPhone] = useState(null);
@@ -38,12 +38,12 @@ const PcrFrom = ({navigation}) => {
         <>
             <View style={styles.SubmitBtn}>
                 <TouchableOpacity onPress={()=>{
-                    const url = appUrl.PcrFrom;
+                    const url = appUrl.RtPcrFrom;
                     let jsonObject = {phone:phone, applicationId:applicationId, synchronizeId:synchronizeId};
                     let config = {
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                     };
-
+                    console.log(jsonObject)
                     axios.post(url, JSON.stringify(jsonObject), config)
                     .then(function (response) {
                         if (response.data.status == '1')
@@ -53,7 +53,9 @@ const PcrFrom = ({navigation}) => {
                             AsyncStorage.setItem('service_type', "");
                             AsyncStorage.setItem('application_id', "");
                             AsyncStorage.setItem('synchronize_id', "");
-                            navigation.navigate("Home")
+
+
+                            navigation.navigate("RtPcrHome")
                         }else if (response.data.status == '0')
                         {
                             Alert.alert(response.data.message);
@@ -118,4 +120,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PcrFrom;
+export default RtPcrFrom;

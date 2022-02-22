@@ -15,7 +15,7 @@ import {
 } from "react-native";
 
 
-const PcrList = ({navigation}) => {
+const RtPcrList = ({navigation}) => {
 
     const [phone, setPhone] = useState("");
     const [registeredList, setRegisteredList] = useState([]);
@@ -25,7 +25,7 @@ const PcrList = ({navigation}) => {
         AsyncStorage.getItem('phone').then(value =>{
             setPhone(value)
 
-            const url = appUrl.PcrRegisteredList;
+            const url = appUrl.RtPcrRegisteredList;
             let jsonObject = {phone:value};
             let config = {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded', }
@@ -34,6 +34,7 @@ const PcrList = ({navigation}) => {
             .then(function (response) {
                 if (response.data.status == '1')
                 {
+                    console.log(response.data)
                     setRegisteredList(response.data.myData)
                     setPhone(value);
                 }else if (response.data.status == '0')
@@ -48,7 +49,6 @@ const PcrList = ({navigation}) => {
         });
     }, [])
 
-
     return (
         <SafeAreaView style={styles.container}>
             {
@@ -60,9 +60,11 @@ const PcrList = ({navigation}) => {
                     renderItem={({item}) =>(
                         <TouchableOpacity
                             onPress={()=>{
-                                // console.log("---"+item.synchronize_id+"----")
+                                // console.log("======"+item.application_id+"======")
+                                // console.log("======"+item.synchronize_id+"======")
+                                // console.log(item) 
                                 AsyncStorage.setItem('user_phone', item.user_phone);
-                                AsyncStorage.setItem('service_type', "pcr");
+                                AsyncStorage.setItem('service_type', "rtPcr");
                                 AsyncStorage.setItem('application_id', item.application_id);
                                 AsyncStorage.setItem('synchronize_id', item.synchronize_id);
 
@@ -75,7 +77,7 @@ const PcrList = ({navigation}) => {
                                 .then(function (response) {
                                     if (response.data.status == '1')
                                     {
-                                        navigation.navigate("Volunteer otp")
+                                        navigation.navigate("Rt Pcr Volunteer Otp")
                                     }else if (response.data.status == '0')
                                     {
                                         Alert.alert(response.data.message)
@@ -134,4 +136,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default PcrList;
+export default RtPcrList;

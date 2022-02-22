@@ -13,7 +13,7 @@ const UserOtp = ({navigation, route}) => {
 
     const goForword=(message)=>{
         Alert.alert(message);
-        navigation.navigate("Pcr from")
+        navigation.navigate("Rt Pcr from")
     }
 
     return (

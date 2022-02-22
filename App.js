@@ -73,7 +73,7 @@ const App = () => {
         <Stack.Screen
             name="RtPcrHome"
             component={RtPcrHome}
-            options={{ title: 'Home', style: {backgroundColor: 'gray'} }}
+            options={{ title: 'RT-PCR Home', style: {backgroundColor: 'gray'} }}
         />
 
         {/* pcr related natigation start here */}
@@ -112,16 +112,16 @@ const App = () => {
         />
 
         <Stack.Screen
-            name="Rt Pcr Volunteer otp"
+            name="Rt Pcr Volunteer Otp"
             component={RtPcrVolunteerOtp}
-            options={{ title: 'RT-PCR Volunteer otp', style: {backgroundColor: 'gray'} }}
+            options={{ title: 'RT-PCR Volunteer Otp', style: {backgroundColor: 'gray'} }}
         />
 
 
         <Stack.Screen
             name="Rt Pcr from"
             component={RtPcrPcrFrom}
-            options={{ title: 'RT-PCR test', style: {backgroundColor: 'gray'} }}
+            options={{ title: 'RT-PCR Test', style: {backgroundColor: 'gray'} }}
         />
 
         <Stack.Screen
