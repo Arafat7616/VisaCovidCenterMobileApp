@@ -7,6 +7,7 @@ import Welcome from './src/Components/Welcome';
 import QRScanner from './src/Components/QRCodeScanner';
 import MobileOTP from './src/Components/MobileOTP';
 import Home from './src/Components/Home';
+import RtPcrHome from './src/Components/RtPcrHome';
 import NIDScanner from "./src/Components/Sample/index.android";
 import AccountEntry from "./src/Components/AccountEntry";
 
@@ -16,6 +17,12 @@ import VolunteerOtp from './src/Components/pcr/VolunteerOtp';
 import PcrFrom from './src/Components/pcr/PcrFrom';
 import PcrList from './src/Components/pcr/PcrList';
 
+//rtPcr
+import RtPcrUserOtp from './src/Components/rtPcr/RtPcrUserOtp';
+import RtPcrVolunteerOtp from './src/Components/rtPcr/RtPcrVolunteerOtp';
+import RtPcrPcrFrom from './src/Components/rtPcr/RtPcrPcrFrom';
+import RtPcrPcrList from './src/Components/rtPcr/RtPcrPcrList';
+
 //booster
 import BoosterFrom from "./src/Components/booster/BoosterFrom";
 import BoosterList from "./src/Components/booster/BoosterList";
@@ -23,7 +30,7 @@ import BoosterUserOtp from "./src/Components/booster/UserOtp";
 import BoosterVolunteerOtp from "./src/Components/booster/VolunteerOtp";
 
 
-//booster
+//vaccine
 import VaccineFrom from "./src/Components/vaccination/VaccineFrom";
 import VaccineFirstList from "./src/Components/vaccination/VaccineFirstList";
 import VaccineSecondList from "./src/Components/vaccination/VaccineSecondList";
@@ -46,24 +53,30 @@ const App = () => {
           options={{ title: 'Welcome', style: {backgroundColor: 'gray'} }}
         />
 
-          <Stack.Screen
-              name="AccountEntry"
-              component={AccountEntry}
-              options={{ title: 'Login', style: {backgroundColor: 'gray'} }}
-          />
+        <Stack.Screen
+            name="AccountEntry"
+            component={AccountEntry}
+            options={{ title: 'Login', style: {backgroundColor: 'gray'} }}
+        />
 
-          <Stack.Screen
-              name="Mobile Otp"
-              component={MobileOTP}
-              options={{ title: 'Mobile Otp', style: {backgroundColor: 'gray'} }}
-          />
+        <Stack.Screen
+            name="Mobile Otp"
+            component={MobileOTP}
+            options={{ title: 'Mobile Otp', style: {backgroundColor: 'gray'} }}
+        />
 
-          <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ title: 'Home', style: {backgroundColor: 'gray'} }}
-          />
+        <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ title: 'Home', style: {backgroundColor: 'gray'} }}
+        />
+        <Stack.Screen
+            name="RtPcrHome"
+            component={RtPcrHome}
+            options={{ title: 'RT-PCR Home', style: {backgroundColor: 'gray'} }}
+        />
 
+        {/* pcr related natigation start here */}
         <Stack.Screen
             name="User otp"
             component={UserOtp}
@@ -88,6 +101,36 @@ const App = () => {
           component={PcrList}
           options={{ title: 'Pcr registration list', style: {backgroundColor: 'gray'} }}
         />
+
+        {/* pcr related natigation end here */}
+
+        {/* RT-PCR related natigation start here */}
+        <Stack.Screen
+            name="Rt Pcr User otp"
+            component={RtPcrUserOtp}
+            options={{ title: 'RT-PCR User otp', style: {backgroundColor: 'gray'} }}
+        />
+
+        <Stack.Screen
+            name="Rt Pcr Volunteer Otp"
+            component={RtPcrVolunteerOtp}
+            options={{ title: 'RT-PCR Volunteer Otp', style: {backgroundColor: 'gray'} }}
+        />
+
+
+        <Stack.Screen
+            name="Rt Pcr from"
+            component={RtPcrPcrFrom}
+            options={{ title: 'RT-PCR Test', style: {backgroundColor: 'gray'} }}
+        />
+
+        <Stack.Screen
+          name="Rt Pcr list"
+          component={RtPcrPcrList}
+          options={{ title: 'RT-PCR registration list', style: {backgroundColor: 'gray'} }}
+        />
+
+        {/* RT-PCR related natigation end here */}
 
         <Stack.Screen
             name="Booster User otp"

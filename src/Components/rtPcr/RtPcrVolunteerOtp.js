@@ -6,7 +6,7 @@ import appUrl from "../../RestApi/AppUrl";
 import axios from "axios";
 
 
-const VolunteerOtp = ({navigation}) => {
+const RtPcrVolunteerOtp = ({navigation}) => {
 
     const [phone, setPhone] = useState("");
     const [userPhone, setUserPhone] = useState("");
@@ -17,9 +17,11 @@ const VolunteerOtp = ({navigation}) => {
         AsyncStorage.getItem('phone').then(value =>{
             setPhone(value)
         });
+
         AsyncStorage.getItem('user_phone').then(value =>{
             setUserPhone(value)
         });
+
     }, [])
 
     const goForword=(message)=>{
@@ -33,7 +35,7 @@ const VolunteerOtp = ({navigation}) => {
             .then(function (response) {
                 if (response.data.status == '1')
                 {
-                    navigation.navigate("Vaccine User otp", {userPhone: userPhone})
+                    navigation.navigate("Rt Pcr User otp", {userPhone: userPhone})
                 }else if (response.data.status == '0')
                 {
                     Alert.alert(response.data.message)
@@ -193,4 +195,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default VolunteerOtp;
+export default RtPcrVolunteerOtp;

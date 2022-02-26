@@ -14,42 +14,43 @@ import {
     SafeAreaView
 } from "react-native";
 
-const VaccineSecondList = ({navigation}) => {
+
+const RtPcrList = ({navigation}) => {
 
     const [phone, setPhone] = useState("");
     const [registeredList, setRegisteredList] = useState([]);
+
 
     useEffect(()=>{
         AsyncStorage.getItem('phone').then(value =>{
             setPhone(value)
 
-            const url = appUrl.VaccinationRegisteredSecondList;
+            const url = appUrl.RtPcrRegisteredList;
             let jsonObject = {phone:value};
             let config = {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded', }
             };
             axios.post(url, JSON.stringify(jsonObject), config)
-                .then(function (response) {
-                    if (response.data.status == '1')
-                    {
-                        setRegisteredList(response.data.myData)
-                        // console.log(response.data.myData)
-                        setPhone(value);
-                    }else if (response.data.status == '0')
-                    {
-                        Alert.alert(response.data.message)
-                    }
+            .then(function (response) {
+                if (response.data.status == '1')
+                {
+                    console.log(response.data)
+                    setRegisteredList(response.data.myData)
+                    setPhone(value);
+                }else if (response.data.status == '0')
+                {
+                    Alert.alert(response.data.message)
+                }
 
-                })
-                .catch(function (error) {
-                    // console.log(error);
-                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         });
     }, [])
 
     return (
         <SafeAreaView style={styles.container}>
-
             {
                 registeredList.length == 0  ?
                 (<Text style={styles.dataStatus}>No data found</Text>) :
@@ -59,8 +60,11 @@ const VaccineSecondList = ({navigation}) => {
                     renderItem={({item}) =>(
                         <TouchableOpacity
                             onPress={()=>{
+                                // console.log("======"+item.application_id+"======")
+                                // console.log("======"+item.synchronize_id+"======")
+                                // console.log(item) 
                                 AsyncStorage.setItem('user_phone', item.user_phone);
-                                AsyncStorage.setItem('service_type', "vaccineSecond");
+                                AsyncStorage.setItem('service_type', "rtPcr");
                                 AsyncStorage.setItem('application_id', item.application_id);
                                 AsyncStorage.setItem('synchronize_id', item.synchronize_id);
 
@@ -73,21 +77,20 @@ const VaccineSecondList = ({navigation}) => {
                                 .then(function (response) {
                                     if (response.data.status == '1')
                                     {
-                                        navigation.navigate("Vaccine Volunteer otp")
+                                        navigation.navigate("Rt Pcr Volunteer Otp")
                                     }else if (response.data.status == '0')
                                     {
                                         Alert.alert(response.data.message)
                                     }
+
                                 })
                                 .catch(function (error) {
-                                    // console.log(error);
+                                    console.log(error);
                                 });
                             }}
                         >
                             <View style={styles.mainCard}>
                                 <Text style={styles.mainCardName}>Name: {item.user_name}</Text>
-                                {/* <Text style={styles.mainCardName}>Synchrnize Id : {item.synchronize_id}</Text> */}
-                                <Text style={styles.mainCardVaccine}>Vaccine: {item.name_of_vaccine}</Text>
                                 <Text style={styles.mainCardPhone}>Phone: {item.user_phone}</Text>
                                 <Text style={styles.mainCardReg}>Reg. ID: {item.application_id}</Text>
                             </View>
@@ -114,9 +117,7 @@ const styles = StyleSheet.create({
         color:'#0055A1',
         fontWeight:"bold",
     },
-    mainCardVaccine:{
-        fontWeight:"bold",
-    },
+
     mainCardPhone:{
 
     },
@@ -134,4 +135,5 @@ const styles = StyleSheet.create({
     },
 });
 
-export default VaccineSecondList;
+
+export default RtPcrList;

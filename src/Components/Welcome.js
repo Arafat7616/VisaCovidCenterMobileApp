@@ -8,6 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Welcome = ({navigation}) => {
     const [phone, setPhone] = useState("");
     const [status, setStatus] = useState("");
+    const [centerType, setCenterType] = useState("");
 
     useEffect(()=>{
         AsyncStorage.getItem('phone').then(value =>{
@@ -17,14 +18,22 @@ const Welcome = ({navigation}) => {
         AsyncStorage.getItem('loginStatus').then(value =>{
             setStatus(value)
         });
-
+        AsyncStorage.getItem('centerType').then(value =>{
+            setCenterType(value)
+        });
     }, [])
 
     var path = '';
 
     if (status == '1')
     {
-        path = 'Home'
+        // check if this user is rtpcr center trusted medical assistent or normal center 
+        if (centerType == "normal"){
+            path = 'Home'
+        }
+        if(centerType == "rtpcr"){
+            path = 'RtPcrHome'
+        }
     }else {
         path = 'AccountEntry';
     }

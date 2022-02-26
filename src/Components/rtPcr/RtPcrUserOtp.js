@@ -1,33 +1,26 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import OTPInputView from '@twotalltotems/react-native-otp-input'
 import {View, StyleSheet, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import appUrl from "../RestApi/AppUrl";
+import appUrl from "../../RestApi/AppUrl";
 import axios from "axios";
 
+const UserOtp = ({navigation, route}) => {
 
-
-const MobileOTP= ({navigation}) =>{
-
-    const [phone, setPhone] = useState("");
+    const [userPhone, setUserPhone] = useState(route.params.userPhone);
     const [otp, setOtp] = useState(0);
 
 
-    useEffect(()=>{
-        AsyncStorage.getItem('phone').then(value =>{
-            setPhone(value)
-        });
-
-    }, [])
-
-
-
+    const goForword=(message)=>{
+        Alert.alert(message);
+        navigation.navigate("Rt Pcr from")
+    }
 
     return (
         <ScrollView>
             <View style={styles.container}>
                 <View>
-                    <Text style={styles.titleStyle}>OTP Code is sent to <Text style={styles.titleNumberStyle}>{phone}</Text> number</Text>
+                    <Text style={styles.titleStyle}>OTP Code is sent to <Text style={styles.titleNumberStyle}>{userPhone}</Text> number</Text>
                 </View>
                 <OTPInputView
                     style={styles.containerInput}
@@ -41,63 +34,20 @@ const MobileOTP= ({navigation}) =>{
                 />
             </View>
 
-            <View style={styles.bottomView}>
-                <View style={styles.btnResend} >
-                    <Text style={styles.textResend}>
-                        Didn't receive any code?
-                    </Text>
-                </View>
-                <TouchableOpacity onPress={() => {
-                    const url = appUrl.VolunteerOtpResend;
-                    let jsonObject = {phone:phone};
-                    let config = {
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-                    };
-                    axios.post(url, JSON.stringify(jsonObject), config)
-                        .then(function (response) {
-                            if (response.data.status == '1')
-                            {
-                                Alert.alert(response.data.message);
-                                navigation.navigate("Mobile OTP")
-                            }else if (response.data.status == '0')
-                            {
-                                Alert.alert(response.data.message)
-                            }
-
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                    }}>
-                    <View style={styles.btnChangeNumber} >
-                        <Text style={styles.textChange} >Send again</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
             <View style={styles.SubmitBtn}>
                 <TouchableOpacity onPress={()=>{
-                    const url = appUrl.VolunteerOtpCheck;
-                    let jsonObject = {phone:phone, otp:otp};
+                    const url = appUrl.OtpCheck;
+                    let jsonObject = {phone:userPhone, otp:otp};
                     let config = {
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                     };
 
                     axios.post(url, JSON.stringify(jsonObject), config)
                         .then(function (response) {
+                            console.log(response.data)
                             if (response.data.status == '1')
                             {
-                                Alert.alert(response.data.message);
-                                AsyncStorage.setItem('phone', response.data.phone);
-                                AsyncStorage.setItem('loginStatus', response.data.loginStatus);
-                                AsyncStorage.setItem('centerType', response.data.centerType);
-
-                                if(response.data.centerType == "normal"){
-                                    navigation.navigate("Home")
-                                }
-                                if(response.data.centerType == "rtpcr"){
-                                    navigation.navigate("RtPcrHome")
-                                }
-                               
+                                goForword(response.data.message);
                             }else if (response.data.status == '0')
                             {
                                 Alert.alert(response.data.message);
@@ -114,7 +64,7 @@ const MobileOTP= ({navigation}) =>{
             </View>
         </ScrollView>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -153,7 +103,8 @@ const styles = StyleSheet.create({
     },
     SubmitBtn:{
         textAlign:"center",
-        marginLeft:"15%"
+        marginLeft:"15%",
+        marginTop:20
     },
     btnResend: {
         width: 200,
@@ -212,4 +163,5 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MobileOTP;
+
+export default UserOtp;

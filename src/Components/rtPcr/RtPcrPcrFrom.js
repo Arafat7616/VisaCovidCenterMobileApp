@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import React, {useState, useEffect} from 'react';
+import OTPInputView from '@twotalltotems/react-native-otp-input'
+import {View, StyleSheet, KeyboardAvoidingView, TouchableOpacity, Text, ScrollView, Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import appUrl from "../../RestApi/AppUrl";
 import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const BoosterFrom = ({navigation}) => {
+const RtPcrFrom = ({navigation}) => {
 
     const [phone, setPhone] = useState(null);
     const [userPhone, setUserPhone] = useState(null);
@@ -21,26 +22,29 @@ const BoosterFrom = ({navigation}) => {
             setUserPhone(value)
         });
 
-        AsyncStorage.getItem('application_id').then(value =>{
-            setApplicationId(value)
-        });
 
         AsyncStorage.getItem('synchronize_id').then(value =>{
             setSynchronizeId(value)
         });
 
+        AsyncStorage.getItem('application_id').then(value =>{
+            setApplicationId(value)
+        });
+
+
     }, [])
 
     return (
-        <View style={styles.SubmitBtn}>
-            <TouchableOpacity onPress={()=>{
-                const url = appUrl.BoosterFrom;
-                let jsonObject = {phone:phone, applicationId:applicationId, synchronizeId:synchronizeId};
-                let config = {
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-                };
-
-                axios.post(url, JSON.stringify(jsonObject), config)
+        <>
+            <View style={styles.SubmitBtn}>
+                <TouchableOpacity onPress={()=>{
+                    const url = appUrl.RtPcrFrom;
+                    let jsonObject = {phone:phone, applicationId:applicationId, synchronizeId:synchronizeId};
+                    let config = {
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                    };
+                    console.log(jsonObject)
+                    axios.post(url, JSON.stringify(jsonObject), config)
                     .then(function (response) {
                         if (response.data.status == '1')
                         {
@@ -49,21 +53,23 @@ const BoosterFrom = ({navigation}) => {
                             AsyncStorage.setItem('service_type', "");
                             AsyncStorage.setItem('application_id', "");
                             AsyncStorage.setItem('synchronize_id', "");
-                            navigation.navigate("Home")
+
+
+                            navigation.navigate("RtPcrHome")
                         }else if (response.data.status == '0')
                         {
                             Alert.alert(response.data.message);
                         }
-
                     })
                     .catch(function (error) {
                         console.log(error);
                     });
-            }}  style={styles.otpButton}
-            >
-                <Text style={styles.otpButtonView}>Complete Booster dose ?</Text>
-            </TouchableOpacity>
-        </View>
+                }}  style={styles.otpButton}
+                >
+                    <Text style={styles.otpButtonView}>Complete sample collection ?</Text>
+                </TouchableOpacity>
+            </View>
+        </>
     );
 };
 
@@ -113,4 +119,5 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
 });
-export default BoosterFrom;
+
+export default RtPcrFrom;

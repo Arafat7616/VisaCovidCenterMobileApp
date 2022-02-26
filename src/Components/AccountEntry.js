@@ -51,7 +51,6 @@ export default function App({navigation}) {
                             {
                                 Alert.alert(response.data.message)
                             }
-
                         })
                         .catch(function (error) {
                             // handle error
